@@ -44,31 +44,39 @@
       justify-content: center;
       align-items: center;
       z-index: 1000;
+      overflow: hidden;
+      padding: 20px;
     }
 
     .overlay img {
-      max-width: 90%;
-      max-height: 90%;
+      max-width: 95%;
+      max-height: 95%;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      transform: scale(1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .overlay.show img {
+      transform: scale(1.5); /* zoom factor adjusted to fit screen */
     }
   </style>
 </head>
 <body>
-  <h1>Our Clothing Collection</h1>
+  <h1>Harmony's Luxury Wears</h1>
   <div class="gallery">
     <div class="item">
       <img src="shirt1.jpg" alt="Classic White Shirt">
       <p>Classic White Shirt</p>
       <p>₦8,000</p>
-      <a href="https://wa.me/2348152637365?text=I'm%20interested%20in%20the%20Classic%20White%20Shirt">Order on WhatsApp</a>
+      <a href="https://wa.me/2347047218231?text=I'm%20interested%20in%20the%20Classic%20White%20Shirt">Order on WhatsApp</a>
     </div>
 
     <div class="item">
       <img src="jeans1.jpg" alt="Blue Jeans">
       <p>Blue Jeans</p>
       <p>₦12,000</p>
-      <a href="https://wa.me/2348152637365?text=I'm%20interested%20in%20the%20Blue%20Jeans">Order on WhatsApp</a>
+      <a href="https://wa.me/2347047218231?text=I'm%20interested%20in%20the%20Blue%20Jeans">Order on WhatsApp</a>
     </div>
   </div>
 
@@ -81,19 +89,21 @@
     const overlay = document.getElementById('overlay');
     const zoomedImg = document.getElementById('zoomedImg');
 
-    // Add click event to all images in the gallery
     document.querySelectorAll('.gallery img').forEach(img => {
       img.addEventListener('click', () => {
-        zoomedImg.src = img.src; // set the zoomed image to the clicked one
-        overlay.style.display = 'flex'; // show overlay
+        zoomedImg.src = img.src;
+        overlay.style.display = 'flex';
+        setTimeout(() => overlay.classList.add('show'), 10); // trigger zoom
       });
     });
 
-    // Clicking anywhere on overlay closes it
     overlay.addEventListener('click', () => {
-      overlay.style.display = 'none';
-      zoomedImg.src = '';
+      overlay.classList.remove('show'); // zoom out
+      setTimeout(() => {
+        overlay.style.display = 'none';
+        zoomedImg.src = '';
+      }, 300); // wait for zoom-out animation
     });
   </script>
 </body>
-  </html>
+    </html>
